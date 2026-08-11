@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use OpticDisc-DomainGuard, please cite the associated manuscript."
+title: "OpticDisc-DomainGuard: A Cross-Domain Reliability Audit for Glaucoma Classification from Fundus Images"
+type: software
+authors:
+  - family-names: Beyene
+    given-names: Eyasu Desalegne
+    orcid: "https://orcid.org/0009-0000-3375-0834"
+  - family-names: Kılıç
+    given-names: Niyazi
+    orcid: "https://orcid.org/0009-0007-4233-8762"
+repository-code: "https://github.com/eyasudesalegne/OpticDisc-DomainGuard"
+license: MIT
+version: 0.1.0
+date-released: 2026-08-11
+keywords:
+  - glaucoma
+  - fundus imaging
+  - domain shift
+  - external validation
+  - reliability audit
+  - medical AI
