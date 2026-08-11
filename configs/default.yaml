@@ -1,0 +1,56 @@
+project:
+  name: OpticDisc-DomainGuard
+  seed: 42
+  output_dir: results
+
+data:
+  manifest: data/manifests/domainguard_manifest.csv
+  image_size: 224
+  source_domain: HYGD
+  external_domains: [ACRIMA, G1020]
+  columns:
+    path: path
+    label: label
+    domain: domain
+    group: group_id
+
+validation:
+  grouped_source_cv: true
+  n_splits: 5
+  strict_external_transfer: true
+
+features:
+  resnet50: true
+  branches:
+    - raw_resize
+    - disc_color_clahe
+  handcrafted_disc_color_clahe: true
+  hybrid: true
+
+classifier:
+  type: logistic_regression
+  max_iter: 5000
+  class_weight: balanced
+
+threshold:
+  # Threshold must be selected using source-domain data only.
+  criterion: youden_j
+
+calibration:
+  bins: 10
+
+adaptation:
+  coral: true
+  fewshot_support_sizes: [5, 10, 20, 50]
+
+risk_gating:
+  coverage_grid: [1.0, 0.9, 0.8, 0.7, 0.6, 0.5]
+
+backbones:
+  frozen:
+    - resnet50
+    - efficientnet_b0
+    - convnext_tiny
+    - swin_tiny_patch4_window7_224
+  # DINOv2 and fine-tuning are manuscript sensitivity analyses and may require
+  # environment-specific model loading/configuration.
